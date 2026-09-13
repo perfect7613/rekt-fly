@@ -1764,3 +1764,6 @@ footer button {
     font-size: 12px;
   }
 }
+@media (max-width: 680px) {
+  .topbar nav { flex-wrap: wrap; gap: 10px; min-width: 0; }
+}
