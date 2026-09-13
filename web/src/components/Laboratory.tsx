@@ -33,6 +33,7 @@ import {
 import World from "./World";
 import BrainView from "./BrainView";
 import Challenge from "./Challenge";
+import { FirstSteps, ReadingNeurons } from "./Learn";
 const time = (n: number) =>
   `${Math.floor(n / 60)
     .toString()
@@ -195,7 +196,7 @@ export default function Laboratory() {
             Sources <ArrowUpRight size={13} />
           </button>
           <button onClick={() => openModal("guide")}>
-            Field guide <CircleHelp size={14} />
+            How to play <CircleHelp size={14} />
           </button>
         </nav>
         <div className="testnet">
@@ -226,13 +227,32 @@ export default function Laboratory() {
             </small>
           </div>
         </section>
+        <FirstSteps
+          ready={!!game}
+          onStart={() => {
+            mutate((g) => {
+              g.reset();
+              g.state.ablation = "none";
+              g.state.autopilot = true;
+              g.state.scenario = "storm";
+              g.state.speed = 1;
+              g.state.status = "running";
+              g.log(
+                "Guided practice: watch health and the neural pilot. Pause to read the signals.",
+              );
+            });
+            document
+              .getElementById("practice")
+              ?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+        />
         {error && (
           <div className="error" role="alert">
             {error}
             <button onClick={() => window.location.reload()}>Retry</button>
           </div>
         )}
-        <section className="lab-grid">
+        <section className="lab-grid" id="practice">
           <div className="arena-panel">
             <div className="panel-heading">
               <div>
@@ -316,7 +336,7 @@ export default function Laboratory() {
                     <span style={{ background: p.color }} />
                     <div>
                       <strong>{p.name}</strong>
-                      <small>{p.yield} illustrative APY</small>
+                      <small>Scenery · click to explore</small>
                     </div>
                     <ArrowUpRight size={13} />
                   </button>
@@ -426,8 +446,8 @@ export default function Laboratory() {
                     <span>
                       {
                         [
-                          "Looming velocity",
-                          "Looming expansion",
+                          "Visual input · LC4",
+                          "Visual input · LPLC2",
                           "Escape output",
                         ][i]
                       }
@@ -455,7 +475,11 @@ export default function Laboratory() {
               <span>ESCAPE</span>
             </div>
             <p className="brain-footnote">
-              316-cell subgraph · Background: sampled anatomical context
+              Hz = average spikes / simulated second / neuron
+              <br />
+              <a href="#read-brain">How to read these signals →</a>
+              <br />
+              316-cell subgraph · Background: anatomy only
               <br />
               20 ms neural time / 100 ms game time
             </p>
@@ -656,6 +680,7 @@ export default function Laboratory() {
             ))}
           </div>
         </section>
+        <ReadingNeurons state={s} />
         <section className="decision-panel">
           <div className="section-label">
             WHY THE FLY ACTS <span>A PUBLIC, INSPECTABLE RULE</span>
@@ -726,30 +751,66 @@ export default function Laboratory() {
             {modal === "guide" ? (
               <>
                 <p>
-                  Survive a three-minute simulated ETH market with as little
-                  emergency capital as possible. Press play to begin.
+                  <b>DeFi</b> means financial services run by blockchain
+                  programs called smart contracts. This game explores one idea:
+                  borrowing against a deposit.
                 </p>
                 <ol>
                   <li>
-                    <strong>Watch health.</strong> Health factor is collateral ×
-                    price × 78% ÷ debt. Below 1.00, the practice game gives you
-                    five seconds to act.
+                    <b>Your loan:</b> you owe 7,000 virtual dollars (vUSD). You
+                    locked 5 virtual ETH (vETH) as collateral—a security
+                    deposit. “Virtual” means pretend game units.
                   </li>
                   <li>
-                    <strong>Protect the position.</strong> Add vETH or repay
-                    vUSD. The neural pilot uses simulated DNp01 firing as a
-                    trigger for a designed protection rule.
+                    <b>The danger:</b> when ETH gets cheaper, your deposit is
+                    worth less, but your loan stays the same. Health factor
+                    compares the allowed collateral value with the debt. At the
+                    starting price: 5 × 2,000 × 0.78 ÷ 7,000 = 1.11.
                   </li>
                   <li>
-                    <strong>Run the control.</strong> Reset the same seed,
-                    silence both visual populations, and replay. Their outgoing
-                    connections are suppressed; incoming stimulation remains.
+                    <b>Your two moves:</b> Add collateral moves spare ETH into
+                    the deposit. Repay debt uses spare dollars to reduce what
+                    you owe. Both improve health; both use limited reserves.
+                    Lower capital used is better only if the loan survives.
+                  </li>
+                  <li>
+                    <b>Liquidation:</b> a lender can seize collateral to cover
+                    an unsafe loan. In our practice game, health below 1.00 for
+                    five seconds ends the round. Real protocols have different
+                    rules and need not give that grace period.
+                  </li>
+                  <li>
+                    <b>Your first run:</b> start guided practice and leave
+                    Neural pilot on. Watch its actions in the log. Pause anytime
+                    to read the neural graph. Reset restarts the same market; 4×
+                    runs it faster.
+                  </li>
+                  <li>
+                    <b>Your next run:</b> turn the pilot off and try protecting
+                    the loan yourself. Or reset and block both visual outputs to
+                    see how the simulated escape pathway affects the pilot.
                   </li>
                 </ol>
                 <p>
-                  Food pools are illustrative scenery and foraging targets.
-                  Their APYs do not accrue interest. Market values and all
-                  transactions in this version are local simulation.
+                  <b>The fly and garden:</b> the fly moves toward an escape
+                  location when its output neurons fire. The garden locations
+                  are scenery, not investments; clicking them does not earn
+                  interest or move your collateral.
+                </p>
+                <p>
+                  <b>Optional Sepolia section:</b> this connects to a separate,
+                  real test network through MetaMask. Testnet ETH pays
+                  transaction fees (“gas”); vETH/vUSD are free challenge tokens.
+                  Practice buttons never spend from your wallet.
+                </p>
+                <p>
+                  <a
+                    href="https://ethereum.org/defi/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Read Ethereum’s introduction to DeFi ↗
+                  </a>
                 </p>
               </>
             ) : (
@@ -806,8 +867,9 @@ export default function Laboratory() {
                 </div>
                 <p>
                   Local practice mode is not the official Chainlink challenge.
-                  No wallet transactions, CRE confidential execution or verified
-                  onchain scores are claimed.
+                  The separate Sepolia panel supports explicit wallet actions.
+                  CRE confidential execution and verified onchain scores are not
+                  implemented.
                 </p>
               </>
             )}

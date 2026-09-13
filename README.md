@@ -30,7 +30,7 @@ For Vercel, use **web** as the project root. This is a standard Next.js App Rout
 5. Reset, silence both visual outputs, and replay the same seed to compare.
 6. Drag either 3D view to orbit. Select **Specimen** for a close-up. Export saves a JSON snapshot, event log and price history.
 
-The arena's food-pool yields are illustrative labels, not accruing DeFi positions. Pool selection controls a designed foraging target. The fly's escape target is controlled by the neural readout. The browser gait and navigation are kinematic, not a full physics simulation.
+The arena's food pools are labeled scenery, not accruing DeFi positions. Pool selection controls a designed foraging target. The fly's escape target is controlled by the neural readout. The browser gait and navigation are kinematic, not a full physics simulation.
 
 ## What is real, what is modeled
 
@@ -93,7 +93,7 @@ Runs one bounded, CPU-only, 2,000-step invocation. It stops when finished; it do
 ## Verification from this build
 
 - Production Next.js build and ESLint passed.
-- Nine tests cover onchain token-unit math and minimal protection amounts, plus real data integrity, silence without stimulus, intact versus ablated escape output, reserve accounting, deterministic reset, terminal states, and a complete intact-versus-ablated practice storm.
+- Ten tests cover bounded neural history, pause/reset behavior, onchain token-unit math and minimal protection amounts, plus real data integrity, silence without stimulus, intact versus ablated escape output, reserve accounting, deterministic reset, terminal states, and a complete intact-versus-ablated practice storm.
 - Full practice storm, seed 42: intact neural pilot survived at 180s with six interventions; both visual outputs silenced liquidated at 64.5s with zero interventions. This is a game/model result, not a wet-lab claim.
 - Browser checked: anatomical close-up, 3D scene, start/pause, manual collateral and repayment, and 390px responsive layout.
 - Modal CPU benchmark: 56 bodies, 87 degrees of freedom, 2,000 steps, finite state and no numerical warnings. See the JSON for measured timing and its scope.

@@ -1571,3 +1571,196 @@ footer button {
     padding: 18px;
   }
 }
+
+.learn-intro {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  border: 1px solid #d6d9ca;
+  background: #f0f3e8;
+  border-radius: 12px;
+  margin: 0 0 26px;
+  overflow: hidden;
+}
+.learn-welcome,
+.loan-lesson {
+  padding: 26px;
+}
+.learn-welcome {
+  background: #e7eddb;
+}
+.learn-intro h2 {
+  font-size: 29px;
+  line-height: 1.15;
+  letter-spacing: -0.8px;
+  margin: 12px 0;
+}
+.learn-intro p,
+.reading-neurons p,
+.reading-neurons li {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #58634e;
+}
+.learn-intro small {
+  display: block;
+  color: #67715d;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.lesson-start {
+  background: #294d2a;
+  color: white;
+  border: 0;
+  border-radius: 7px;
+  padding: 12px 18px;
+  margin: 10px 0;
+  cursor: pointer;
+  font: inherit;
+}
+.loan-lesson h3,
+.reading-neurons h3 {
+  font-size: 17px;
+  margin: 0 0 10px;
+}
+.loan-lesson label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin-top: 18px;
+}
+.loan-lesson input {
+  width: 100%;
+  accent-color: #426337;
+  margin: 12px 0;
+}
+.lesson-equation {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 0;
+  font-size: 15px;
+}
+.lesson-equation strong {
+  font-size: 26px;
+  color: #294d2a;
+}
+.lesson-equation .lesson-danger {
+  color: #a34b35;
+}
+.lesson-result {
+  background: #fff9;
+  padding: 10px;
+  border-radius: 6px;
+}
+.reading-neurons {
+  margin-top: 28px;
+  padding: 25px;
+  border: 1px solid #d6d9ca;
+  border-radius: 12px;
+  background: #fafbf6;
+}
+.reading-neurons h2 {
+  font-size: 27px;
+  letter-spacing: -0.6px;
+  margin: 20px 0 10px;
+}
+.neuron-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 22px;
+}
+.neuron-cards article {
+  padding: 18px;
+  background: #f0f3e8;
+  border-radius: 8px;
+}
+.neuron-code {
+  font-size: 12px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 12px;
+}
+.lc4-text {
+  color: #52752a;
+}
+.lplc2-text {
+  color: #287e78;
+}
+.dn-text {
+  color: #b46526;
+}
+.signal-reader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin: 26px 0;
+  align-items: center;
+}
+.trace-box {
+  min-width: 0;
+  border: 1px solid #d6d9ca;
+  border-radius: 8px;
+  padding: 16px;
+}
+.trace-legend {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 11px;
+}
+.trace-box svg {
+  display: block;
+  width: 100%;
+  margin: 14px 0;
+}
+.trace-box small {
+  color: #67715d;
+  font-size: 11px;
+  line-height: 1.5;
+  display: block;
+}
+.reading-neurons details {
+  border-top: 1px solid #d6d9ca;
+  padding: 16px 0;
+}
+.reading-neurons summary {
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+.reading-neurons li {
+  margin-bottom: 10px;
+}
+.reading-neurons a {
+  color: #294d2a;
+  text-underline-offset: 3px;
+}
+.brain-footnote a {
+  color: #c4ed8b;
+  display: inline-block;
+  margin: 6px 0;
+  text-underline-offset: 3px;
+}
+#practice,
+#read-brain {
+  scroll-margin-top: 20px;
+}
+@media (max-width: 680px) {
+  .learn-intro,
+  .neuron-cards,
+  .signal-reader {
+    grid-template-columns: 1fr;
+  }
+  .learn-welcome,
+  .loan-lesson,
+  .reading-neurons {
+    padding: 18px;
+  }
+  .neuron-cards {
+    gap: 10px;
+  }
+  .lesson-equation {
+    font-size: 12px;
+  }
+}

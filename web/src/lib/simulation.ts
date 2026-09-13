@@ -120,6 +120,7 @@ export type GameState = {
   rates: Brain["rates"];
   events: GameEvent[];
   prices: number[];
+  neuralHistory: { LC4: number; LPLC2: number; DNp01: number }[];
   seed: number;
   target: number;
 };
@@ -159,6 +160,7 @@ export function initialState(seed = 42): GameState {
       },
     ],
     prices: [2000],
+    neuralHistory: [],
     seed,
     target: 1,
   };
@@ -253,6 +255,7 @@ export class Game {
     this.updateHF();
     s.danger = Math.max(0, Math.min(1, (1.22 - s.hf) / 0.25));
     s.rates = { ...this.brain.step(s.danger, s.ablation) };
+    s.neuralHistory = [...s.neuralHistory, { ...s.rates }].slice(-100);
     const fleeing = s.rates.DNp01 > 10;
     s.escape = fleeing ? Math.min(1, s.escape + 0.3) : s.escape * 0.88;
     if (s.autopilot && fleeing && s.hf < 1.18 && t - this.lastAction >= 4) {

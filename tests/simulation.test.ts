@@ -95,3 +95,17 @@ test("intact pilot survives the practice storm while the ablated control liquida
   assert.ok(intact.state.interventions > 0);
   assert.equal(control.state.interventions, 0);
 });
+
+test("neural history records independent samples, is bounded, pauses and resets", () => {
+  const game = new Game(circuit);
+  game.state.status = "running";
+  for (let i = 0; i < 120; i++) game.tick();
+  assert.equal(game.state.neuralHistory.length, 100);
+  assert.notEqual(game.state.neuralHistory.at(-1), game.state.rates);
+  game.state.status = "paused";
+  const previous = JSON.stringify(game.state.neuralHistory);
+  game.tick();
+  assert.equal(JSON.stringify(game.state.neuralHistory), previous);
+  game.reset();
+  assert.deepEqual(game.state.neuralHistory, []);
+});
