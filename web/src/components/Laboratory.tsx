@@ -418,15 +418,15 @@ export default function Laboratory() {
             <div className="brain-legend">
               <span>
                 <i className="lc4" />
-                LC4
+                Sensor A
               </span>
               <span>
                 <i className="lplc2" />
-                LPLC2
+                Sensor B
               </span>
               <span>
                 <i className="dn" />
-                DNp01
+                Escape alarm
               </span>
             </div>
             <div className="brain-stats">
@@ -445,15 +445,13 @@ export default function Laboratory() {
                   <div>
                     <span>
                       {
-                        [
-                          "Visual input · LC4",
-                          "Visual input · LPLC2",
-                          "Escape output",
-                        ][i]
+                        ["Threat sensor A", "Threat sensor B", "Escape alarm"][
+                          i
+                        ]
                       }
                     </span>
                     <small>
-                      {type} <b>{Math.round(s?.rates[type] ?? 0)} Hz</b>
+                      <b>{Math.round(s?.rates[type] ?? 0)} Hz</b>
                     </small>
                   </div>
                   <div className="bar">
@@ -470,9 +468,9 @@ export default function Laboratory() {
             <div className="neural-path">
               <span>MARKET THREAT</span>
               <ArrowRight size={12} />
-              <span>LC4 / LPLC2</span>
+              <span>SENSORS</span>
               <ArrowRight size={12} />
-              <span>ESCAPE</span>
+              <span>ALARM</span>
             </div>
             <p className="brain-footnote">
               Hz = average spikes / simulated second / neuron
@@ -586,7 +584,7 @@ export default function Laboratory() {
                 <Zap size={16} />
                 <span>
                   Neural pilot
-                  <small>Escape output can trigger protection</small>
+                  <small>The escape alarm can trigger protection</small>
                 </span>
               </div>
               <button
@@ -640,8 +638,8 @@ export default function Laboratory() {
               <div>
                 <Eye size={15} />
                 <span>
-                  Silence visual outputs
-                  <small>Test the circuit’s causal role</small>
+                  Block sensor signals
+                  <small>Does the alarm still reach the pilot?</small>
                 </span>
               </div>
               <select
@@ -657,8 +655,8 @@ export default function Laboratory() {
                 }
               >
                 <option value="none">Intact</option>
-                <option value="LC4">LC4 off</option>
-                <option value="LPLC2">LPLC2 off</option>
+                <option value="LC4">Sensor A output off</option>
+                <option value="LPLC2">Sensor B output off</option>
                 <option value="both">Both off</option>
               </select>
             </div>
@@ -692,15 +690,15 @@ export default function Laboratory() {
               increases. Current HF: {(s?.hf ?? 1.11).toFixed(2)}.
             </p>
             <p>
-              <b>02 · Run the circuit</b>LC4 and LPLC2 visual neurons receive
-              threat input. Recorded synapses carry it to DNp01 escape neurons.
-              Current DNp01: {(s?.rates.DNp01 ?? 0).toFixed(1)} Hz.
+              <b>02 · Sound the alarm</b>The two threat sensors receive danger
+              input. Their connections carry it to the escape alarm. Current
+              alarm activity: {(s?.rates.DNp01 ?? 0).toFixed(1)} Hz.
             </p>
             <p>
-              <b>03 · Apply the rule</b>With pilot on, DNp01 above 10 Hz and HF
-              below 1.18 trigger 0.50 vETH collateral, or up to 350 vUSD
-              repayment if collateral runs out. Actions have a four-second
-              cooldown.
+              <b>03 · Apply the rule</b>With pilot on, escape alarm activity
+              above 10 Hz and health below 1.18 trigger 0.50 vETH collateral, or
+              up to 350 vUSD repayment if collateral runs out. Actions have a
+              four-second cooldown.
             </p>
           </div>
           <p className="protection-explanation">

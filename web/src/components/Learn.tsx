@@ -83,48 +83,68 @@ export function ReadingNeurons({ state }: { state: GameState | null }) {
       <div className="section-label">
         READ THE SIGNAL <span>AN ALARM CIRCUIT, EXPLAINED</span>
       </div>
-      <h2>Three neuron types. One escape pathway.</h2>
+      <h2>Sense danger. Sound the alarm. Protect the loan.</h2>
       <p>
-        A neuron is a cell that sends brief electrical pulses called{" "}
-        <b>spikes</b>. A <b>synapse</b> is a connection through which one neuron
-        influences another. These type names describe groups of cells in a fruit
-        fly’s visual system.
+        Think of this as a tiny alarm system. Two groups of cells sense danger,
+        then another group sends an escape signal. You do not need to remember
+        the scientific names to play.
       </p>
       <div className="neuron-cards">
         <article>
-          <span className="neuron-code lc4-text">LC4 · 104 cells</span>
-          <h3>How fast is it growing?</h3>
+          <span className="neuron-code lc4-text">GREEN · THREAT SENSOR A</span>
+          <h3>“Something is approaching.”</h3>
           <p>
-            <b>Lobula columnar type 4.</b> In flies, this visual pathway carries
-            information about the angular expansion speed of an approaching
-            object—imagine a ball rushing toward your face.
+            One input channel to the alarm. In the game, more danger makes these
+            simulated cells fire more often.
           </p>
+          <details>
+            <summary>Scientific name: LC4</summary>
+            <p>
+              104 lobula columnar type 4 cells. In real flies, this pathway
+              carries information about the expansion speed of an approaching
+              object.
+            </p>
+          </details>
         </article>
         <article>
-          <span className="neuron-code lplc2-text">LPLC2 · 210 cells</span>
-          <h3>Is something looming?</h3>
+          <span className="neuron-code lplc2-text">TEAL · THREAT SENSOR B</span>
+          <h3>“This looks like a threat.”</h3>
           <p>
-            <b>Lobula plate / lobula columnar type 2.</b> These visual neurons
-            detect outward expansion. They contribute information about an
-            approaching object’s apparent size to the escape pathway.
+            A second input channel. It receives the same game-danger signal, but
+            connects through its own recorded biological wiring.
           </p>
+          <details>
+            <summary>Scientific name: LPLC2</summary>
+            <p>
+              210 lobula plate / lobula columnar type 2 cells. In real flies,
+              they detect outward expansion and contribute information about an
+              approaching object’s apparent size.
+            </p>
+          </details>
         </article>
         <article>
-          <span className="neuron-code dn-text">DNp01 · 2 cells</span>
-          <h3>Send the escape signal.</h3>
+          <span className="neuron-code dn-text">ORANGE · ESCAPE ALARM</span>
+          <h3>“Time to get away!”</h3>
           <p>
-            The <b>giant-fiber descending neurons</b> receive visual input and
-            help trigger a rapid escape takeoff. “Descending” means the signal
-            travels from the brain toward body motor circuits.
+            The output signal. If it is strong enough and the loan needs
+            protection, our pilot rule can add collateral or repay debt.
           </p>
+          <details>
+            <summary>Scientific name: DNp01</summary>
+            <p>
+              Two giant-fiber descending neurons. They receive visual input and
+              help trigger a rapid escape takeoff in flies, sending signals
+              toward body motor circuits.
+            </p>
+          </details>
         </article>
       </div>
       <p className="protection-explanation">
-        <b>What our game changes:</b> there is no camera image or approaching
-        object. We feed the same designed market-danger signal into LC4 and
-        LPLC2. Their biological names do not mean the app separately measures
-        market speed and size. DNp01 activity triggers our public financial
-        rule; the fly does not understand loans or money.
+        <b>An alarm, not a dopamine hit.</b> Dopamine is a chemical messenger;
+        this app does not simulate dopamine or reward feelings. The phrases
+        above are friendly labels, not thoughts the fly is having. We substitute
+        market danger for visual input and apply a designed financial rule to
+        the simulated escape signal.
       </p>
       <div className="signal-reader">
         <div>
@@ -139,22 +159,22 @@ export function ReadingNeurons({ state }: { state: GameState | null }) {
             to inspect it.
           </p>
           <p>
-            LC4 and LPLC2 rising means the model is responding to input. DNp01
-            rising means activity reached the escape output. A brief burst is
-            normal; one snapshot cannot show the whole pattern.
+            Green and teal rising mean the threat sensors are responding. Orange
+            rising means the escape alarm is firing. A brief burst is normal;
+            one snapshot cannot show the whole pattern.
           </p>
         </div>
         <div className="trace-box">
           <div className="trace-legend">
-            <span className="lc4-text">LC4</span>
-            <span className="lplc2-text">LPLC2</span>
-            <span className="dn-text">DNp01</span>
+            <span className="lc4-text">Sensor A</span>
+            <span className="lplc2-text">Sensor B</span>
+            <span className="dn-text">Alarm</span>
             <span>0–{Math.ceil(max)} Hz</span>
           </div>
           <svg
             viewBox="0 0 440 120"
             role="img"
-            aria-label="Recent simulated population firing rates; green LC4, teal LPLC2, orange DNp01"
+            aria-label="Recent simulated population firing rates; green threat sensor A, teal threat sensor B, orange escape alarm"
           >
             <path
               d="M0 110H440 M0 60H440 M0 10H440"
@@ -198,15 +218,15 @@ export function ReadingNeurons({ state }: { state: GameState | null }) {
         </summary>
         <ul>
           <li>
-            <b>Colored dots:</b> positions of simulated cells. Green = LC4, teal
-            = LPLC2, orange = DNp01. Brightness highlights recent simulated
-            spikes; it is not a measurement from a living fly.
+            <b>Colored dots:</b> positions of simulated cells. Green = sensor A,
+            teal = sensor B, orange = escape alarm. Brightness highlights recent
+            simulated spikes; it is not a measurement from a living fly.
           </li>
           <li>
             <b>Dim background dots:</b> anatomical context only. These cells are
             not running in the model. Lines show a selected set of stronger
-            recorded connections into DNp01, not moving spikes or every
-            connection.
+            recorded connections into the escape alarm, not moving spikes or
+            every connection.
           </li>
           <li>
             <b>Bars:</b> latest average firing rate. Full bar means 200 Hz or
@@ -214,10 +234,10 @@ export function ReadingNeurons({ state }: { state: GameState | null }) {
             percentages nor prediction confidence.
           </li>
           <li>
-            <b>Both outputs off:</b> blocks signals leaving LC4/LPLC2. Those
-            cells can still fire from input, so their meters need not become
-            zero. Their dots are gray to indicate the block. DNp01 should lose
-            its driven response after pending signals clear.
+            <b>Both outputs off:</b> blocks signals leaving both threat sensors.
+            Those cells can still fire from input, so their meters need not
+            become zero. Their dots are gray to indicate the block. The escape
+            alarm should lose its driven response after pending signals clear.
           </li>
           <li>
             <b>Compare fairly:</b> reset, choose Intact or Both off, and replay
