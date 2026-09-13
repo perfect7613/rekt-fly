@@ -32,6 +32,7 @@ import {
 } from "@/lib/simulation";
 import World from "./World";
 import BrainView from "./BrainView";
+import Challenge from "./Challenge";
 const time = (n: number) =>
   `${Math.floor(n / 60)
     .toString()
@@ -189,8 +190,9 @@ export default function Laboratory() {
         </Link>
         <nav>
           <span className="nav-active">Experiment</span>
+          <a href="#testnet">Sepolia ↗</a>
           <button onClick={() => openModal("sources")}>
-            Research <ArrowUpRight size={13} />
+            Sources <ArrowUpRight size={13} />
           </button>
           <button onClick={() => openModal("guide")}>
             Field guide <CircleHelp size={14} />
@@ -654,6 +656,36 @@ export default function Laboratory() {
             ))}
           </div>
         </section>
+        <section className="decision-panel">
+          <div className="section-label">
+            WHY THE FLY ACTS <span>A PUBLIC, INSPECTABLE RULE</span>
+          </div>
+          <div className="challenge-steps">
+            <p>
+              <b>01 · Encode danger</b>Falling price lowers health factor:
+              collateral × price × 0.78 ÷ debt. Below 1.22, threat input
+              increases. Current HF: {(s?.hf ?? 1.11).toFixed(2)}.
+            </p>
+            <p>
+              <b>02 · Run the circuit</b>LC4 and LPLC2 visual neurons receive
+              threat input. Recorded synapses carry it to DNp01 escape neurons.
+              Current DNp01: {(s?.rates.DNp01 ?? 0).toFixed(1)} Hz.
+            </p>
+            <p>
+              <b>03 · Apply the rule</b>With pilot on, DNp01 above 10 Hz and HF
+              below 1.18 trigger 0.50 vETH collateral, or up to 350 vUSD
+              repayment if collateral runs out. Actions have a four-second
+              cooldown.
+            </p>
+          </div>
+          <p className="protection-explanation">
+            <b>Try a controlled comparison:</b> run the storm with an intact
+            circuit, reset the same seed, silence both visual outputs, and
+            replay. Compare survival and capital used. This tests a designed
+            game controller, not a fly’s ability to trade.
+          </p>
+        </section>
+        <Challenge />
         <footer>
           <span>
             <Bug size={15} /> A little biology. A little market chaos.
