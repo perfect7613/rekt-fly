@@ -1,0 +1,11 @@
+.cache/
+.venv/
+research/
+.env*
+!.env.example
+node_modules/
+.next/
+.vercel/
+__pycache__/
+*.pyc
+artifacts/

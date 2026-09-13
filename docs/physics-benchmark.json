@@ -1,0 +1,12 @@
+{
+  "scope": "NeuroMechFly tethered articulated body; no brain, gait controller, rendering or network loop",
+  "mujoco": "3.13.0",
+  "bodies": 56,
+  "degrees_of_freedom": 87,
+  "steps": 2000,
+  "simulated_seconds": 0.1999999999999943,
+  "wall_seconds": 0.06045145799999996,
+  "load_seconds": 0.07640272399999981,
+  "simulation_to_wall_ratio": 3.308439640942894,
+  "finite_state": true
+}

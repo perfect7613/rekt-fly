@@ -1,0 +1,16 @@
+{
+  "dataset": "FlyWire FAFB v783",
+  "scope": "LC4 + LPLC2 + DNp01 induced subgraph",
+  "license": "CC BY-NC 4.0",
+  "source": "https://github.com/eonsystemspbc/drosophila_brain_model_lif",
+  "annotations": "https://github.com/flyconnectome/flywire_annotations",
+  "annotationCommit": "8587524c1748ce5ef2080822a2fc890fc03bf597",
+  "connectivityCommit": "c976c7a90b2ac5a472c028b5862974217e93573f",
+  "hashes": {
+    "annotations.tsv": "9a4f8b2f843196074431ebd7cd883536afa1be86c8a4ce90970441e8be81d1be",
+    "Connectivity_783.parquet": "efeb23fb99098e9c390f6869969b2a121a2ee92c833cfc45ecb2c1d8e1af0347"
+  },
+  "neurons": 316,
+  "edges": 10711,
+  "note": "Connectivity is a preprocessed v783 derivative; annotations are a later pinned v783 annotation revision. Rendered background points are sampled annotations, not simulated neurons."
+}

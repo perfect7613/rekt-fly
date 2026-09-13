@@ -1,0 +1,11 @@
+{
+  "name": "rekt-fly",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "npm --prefix web run dev",
+    "build": "npm --prefix web run build",
+    "lint": "npm --prefix web run lint",
+    "test": "web/node_modules/.bin/tsx --test tests/*.test.ts"
+  }
+}

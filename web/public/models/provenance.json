@@ -1,0 +1,6 @@
+{
+  "source": "https://github.com/NeLy-EPFL/flygym",
+  "commit": "38c8ec61034cd59bc5ba0de20688d4a3c0000d60",
+  "license": "Apache-2.0",
+  "changes": "STL to GLB; mirrored right body parts; neutral pose applied; browser materials added. Kinematic animation is original and is not validated biomechanics."
+}
