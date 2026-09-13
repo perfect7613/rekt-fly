@@ -9,7 +9,7 @@ npm --prefix web ci
 npm run dev
 ```
 
-Open http://localhost:3000. No API keys, wallet, database, GPU or paid service is required for the browser game.
+Open http://localhost:3000. The practice game needs no API keys or paid services. The optional onchain panel uses MetaMask on Ethereum Sepolia (chain ID 11155111).
 
 ```bash
 npm test
@@ -17,7 +17,7 @@ npm run lint
 npm run build
 ```
 
-For Vercel, use **web** as the project root. This is a standard Next.js App Router app. It has not been published by this build.
+For Vercel, use **web** as the project root. This is a standard Next.js App Router app.
 
 ## Play
 
@@ -40,7 +40,7 @@ The arena's food-pool yields are illustrative labels, not accruing DeFi position
 | Neural dynamics | Original reduced LIF implementation with published Shiu parameters, explicit 0.1 ms Euler timestep and delayed signed synapses |
 | Time mapping | 20 ms neural time for each 100 ms of game time; not real-time whole-brain emulation |
 | Body animation | Original kinematic browser animation; not inferred leg torques from the connectome |
-| Financial actions | Local virtual practice balances; no wallet transactions |
+| Financial actions | Local practice plus a separate MetaMask interface to the official Sepolia challenge: position reads, registration, collateral deposits and debt repayment |
 | Modal | Verified bounded CPU articulation benchmark; not connected to the live browser body |
 | Chainlink/CRE | Planned integration, not implemented; this build is not yet an eligible completed Chainlink challenge submission |
 
@@ -91,15 +91,31 @@ Runs one bounded, CPU-only, 2,000-step invocation. It stops when finished; it do
 ## Verification from this build
 
 - Production Next.js build and ESLint passed.
-- Seven tests cover real data integrity, silence without stimulus, intact versus ablated escape output, reserve accounting, deterministic reset, terminal states, and a complete intact-versus-ablated practice storm.
+- Nine tests cover onchain token-unit math and minimal protection amounts, plus real data integrity, silence without stimulus, intact versus ablated escape output, reserve accounting, deterministic reset, terminal states, and a complete intact-versus-ablated practice storm.
 - Full practice storm, seed 42: intact neural pilot survived at 180s with six interventions; both visual outputs silenced liquidated at 64.5s with zero interventions. This is a game/model result, not a wet-lab claim.
 - Browser checked: anatomical close-up, 3D scene, start/pause, manual collateral and repayment, and 390px responsive layout.
 - Modal CPU benchmark: 56 bodies, 87 degrees of freedom, 2,000 steps, finite state and no numerical warnings. See the JSON for measured timing and its scope.
 
-## Next vertical slice
+## Sepolia setup
 
-Connect a tested locomotion controller to MuJoCo on Modal and stream poses into the existing Three.js scene. Keep the kinematic practice mode available with an explicit label. Then integrate the official Sepolia lending contract and a confidential CRE protection workflow. Those are distinct, unfinished milestones; no mainnet funds or OpenAI credentials are needed for the current build.
+1. Open the app in MetaMask's browser or a desktop browser with MetaMask installed.
+2. Click **Connect MetaMask** in the Sepolia section; approve the switch to Ethereum Sepolia.
+3. Obtain a small amount of free Sepolia ETH for gas through the [ETHGlobal faucet](https://ethglobal.com/faucet). Do not send mainnet funds.
+4. **Join & mint virtual tokens** creates a position in the [official lending contract](https://sepolia.etherscan.io/address/0x88574e7Cc0027afd04951daa09B64d4441931ba1). Registration depends on the organizer's gate.
+5. Once the scenario is active, deposit 0.50 vETH or repay up to 350 vUSD. The UI shows how much would reach health factor 1.20. Each action is simulated before signing; token approvals are limited to the action amount. Confirm approval and action separately.
 
-## Attribution
+The app verifies token addresses and decimals, clears state on wallet changes, reads a consistent block, and reports transaction receipts. It never requests a seed phrase or private key. The neural pilot does not sign transactions. Read failures and organizer gating disable unavailable operations; the browser UI does not bypass contract rules.
 
-See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) and [the research report](docs/FLY_PROJECT_RESEARCH.md). Original application code is MIT; imported assets and data retain their own terms.
+## Hackathon status
+
+The [judging criteria](https://ethglobal.com/events/ethonline2026/info/details) are technicality, originality, practicality, usability and wow factor. The demo path is: show the anatomical fly, explain the danger-to-escape rule, compare intact/ablated runs with the same seed, then demonstrate a real Sepolia position and explain the collateral-versus-repayment tradeoff. A 2–4 minute human-narrated video is required for submission.
+
+The [Chainlink confidential track](https://ethglobal.com/events/ethonline2026/prizes/chainlink) requires meaningful confidential CRE execution and successful simulation/deployment evidence. **That integration is not implemented**, and this repo should not be presented as satisfying it. Full MuJoCo locomotion is also unfinished; the optional CPU benchmark only validates articulated-model loading and stepping.
+
+## New work, reuse and AI assistance
+
+The application UI, Three.js scene, reduced neural simulator, game policy, wallet integration, conversion scripts and tests were developed for this prototype with OpenAI Codex assistance. AI assistance covers `web/src`, `scripts`, `simulation`, `tests`, configuration and documentation. The project owner supplied the concept, event selection, platform constraints, product direction and reuse requirements. This disclosure does not claim eligibility; the event requires meaningful participant involvement and judges assess that contribution.
+
+Reused material is limited to the attributed anatomical assets, published connectivity/annotations, mathematical references and package dependencies. No formal spec-generation framework was used. Research scratch files and duplicate scaffold documents are omitted from the working tree; the actual development history is retained.
+
+See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Original application code is MIT; the fly model is Apache-2.0 and FlyWire data retains CC BY-NC 4.0 terms. Required notices and machine-readable provenance are intentionally retained.
