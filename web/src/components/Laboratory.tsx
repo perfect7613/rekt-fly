@@ -33,6 +33,7 @@ import {
 import World from "./World";
 import BrainView from "./BrainView";
 import Challenge from "./Challenge";
+import ExitLiquidity from "./ExitLiquidity";
 import { FirstSteps, ReadingNeurons } from "./Learn";
 const time = (n: number) =>
   `${Math.floor(n / 60)
@@ -709,6 +710,7 @@ export default function Laboratory() {
           </p>
         </section>
         <Challenge />
+        <ExitLiquidity />
         <footer>
           <span>
             <Bug size={15} /> A little biology. A little market chaos.

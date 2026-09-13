@@ -121,3 +121,19 @@ The application UI, Three.js scene, reduced neural simulator, game policy, walle
 Reused material is limited to the attributed anatomical assets, published connectivity/annotations, mathematical references and package dependencies. No formal spec-generation framework was used. Research scratch files and duplicate scaffold documents are omitted from the working tree; the actual development history is retained.
 
 See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Original application code is MIT; the fly model is Apache-2.0 and FlyWire data retains CC BY-NC 4.0 terms. Required notices and machine-readable provenance are intentionally retained.
+
+## Uniswap exit-liquidity lesson
+
+Open [Exit liquidity](https://rekt-fly.vercel.app/#exit-liquidity), enter a WETH amount, and compare live USDC outputs from the Uniswap V3 0.05% and 0.3% direct pools. This read-only educational flow connects swap liquidity to debt repayment: the UI computes a slippage-adjusted minimum output and the remainder of a hypothetical 7,000 USDC debt. It does not send swaps or affect practice/Sepolia balances.
+
+Integration map:
+- [`web/src/app/api/exit-quote/route.ts`](web/src/app/api/exit-quote/route.ts): fetches one mainnet block and simulates `quoteExactInputSingle` against official QuoterV2; discovers each pool through `getPool` on official V3 Factory. Both quotes are pinned to the same block. Failed routes are disclosed; no mock prices are substituted.
+- [`web/src/lib/uniswap.ts`](web/src/lib/uniswap.ts): ABI, deployment addresses, bounded decimal input parsing, and bigint minimum-output calculation.
+- [`web/src/components/ExitLiquidity.tsx`](web/src/components/ExitLiquidity.tsx): comparison, slippage lesson, debt-coverage calculation, and block/pool provenance.
+- [`tests/uniswap.test.ts`](tests/uniswap.test.ts): invalid amount rejection and conservative base-unit rounding.
+
+Ethereum mainnet contracts: QuoterV2 `0x61fFE014bA17989E743c5F6cB21bF9697530B21e`, Factory `0x1F98431c8aD98523631AE4a59f267346ea31F984`, WETH `0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2`, USDC `0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48`. [Official deployment source](https://developers.uniswap.org/docs/protocols/v3/deployments/v3-ethereum-deployments).
+
+No additional API credentials are required. The server uses public RPC fallback with bounded timeouts and a 10-second edge cache. Quotes include pool fees and price impact, exclude gas/wrapping costs, and can become stale. This compares two direct pools, not every possible route. Slippage tolerance is a hypothetical execution limit, not guaranteed proceeds.
+
+Partner submission: **Uniswap — Best Uniswap Stack Contribution (from scratch)**. Required developer feedback: [FEEDBACK.md](FEEDBACK.md). The live demo demonstrates the integration; the original narrated overview predates this additional lesson.
