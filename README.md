@@ -1,5 +1,7 @@
 # REKT FLY
 
+[Live app](https://rekt-fly.vercel.app) · [GitHub](https://github.com/perfect7613/rekt-fly)
+
 A 3D DeFi survival experiment for ETHOnline 2026. A real, reduced FlyWire escape circuit responds to market danger while a NeuroMechFly anatomical model explores a small arena.
 
 ## Run
